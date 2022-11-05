@@ -40,16 +40,9 @@ if __name__ == "__main__":
         print(OKBLUE + "修正后代码（整文件）" + OKCYAN + "（换行后Windows输入ctrl+Z或Linux输入ctrl+D以结束输入）" + ENDC)
         _input = ''.join(sys.stdin.readlines())
         d['right_code'] = _input
-        valid = True
         for k in d:
             if isinstance(d[k], str):
                 d[k] = d[k].replace('\x1a', '').replace('\x04', '').replace('\t', "    ").rstrip()
-                if d[k].strip() == '':
-                    print(WARNING + f"{k}项为空，请检查输入" + ENDC)
-                    valid = False
-                    break
-        if not valid:
-            continue
         data.append(d)
         f.write(json.dumps(d) + '\n')
         f.flush()
